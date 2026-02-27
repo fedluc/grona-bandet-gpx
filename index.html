@@ -32,35 +32,55 @@
 
 <div id="map"></div>
 
+<style>
+  .stage-table-control {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 8px;
+    border-radius: 5px;
+    font-size: 14px;
+    max-height: 500px;
+    overflow-y: auto;
+    box-shadow: 0 0 6px rgba(0,0,0,0.3);
+  }
+  .stage-table-control table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  .stage-table-control th, 
+  .stage-table-control td {
+    padding: 4px 6px;
+    border: 1px solid #333;
+    text-align: left;
+  }
+  .stage-table-control th {
+    background: #eee;
+  }
+</style>
+
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet-gpx/gpx.js"></script>
 
 <script>
   const map = L.map('map');
-  map.setView([62.5, 13], 8);
+  map.setView([63.5, 14], 4.5);
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors'
   }).addTo(map);
 
-  // -------------------------
-  // ROUTE FILES (COLORED)
-  // -------------------------
-
+  // Route files
   const routes = [
-    { file: "stage1_route.gpx", color: "red" },
-    { file: "stage2_route.gpx", color: "cyan" },
-    { file: "stage2_alt_route.gpx", color: "cyan" },
-    { file: "stage3_route.gpx", color: "yellow" },
-    { file: "stage4_route.gpx", color: "#00FF00" },
-    { file: "stage5_route.gpx", color: "orange" },
-    { file: "stage6_route.gpx", color: "magenta" },
+    { file: "stage1_route.gpx", color: "red", name: "Stage 1" },
+    { file: "stage2_route.gpx", color: "blue", name: "Stage 2" },
+    { file: "stage2_alt_route.gpx", color: "blue", name: "Stage 2 Alt" },
+    { file: "stage3_route.gpx", color: "yellow", name: "Stage 3" },
+    { file: "stage4_route.gpx", color: "#00FF00", name: "Stage 4" },
+    { file: "stage5_route.gpx", color: "orange", name: "Stage 5" },
+    { file: "stage6_route.gpx", color: "magenta", name: "Stage 6" },
   ];
 
-  // -------------------------
-  // RESUPPLY FILES (MARKERS)
-  // -------------------------
 
+  // Resupply waypoint files
   const resupplies = [
     "stage1_resupply.gpx",
     "stage2_resupply.gpx",
@@ -73,33 +93,56 @@
 
   let allBounds = [];
 
-  // ---- Load Routes ----
+    // Create a Leaflet control for the table
+  const StageTableControl = L.Control.extend({
+    onAdd: function(map) {
+      const div = L.DomUtil.create('div', 'stage-table-control');
+      div.innerHTML = `
+        <table>
+          <thead>
+            <tr><th>Stage</th><th>Distance (km)</th></tr>
+          </thead>
+          <tbody id="stage-table-body"></tbody>
+        </table>
+      `;
+      return div;
+    },
+    onRemove: function(map) {
+      // Nothing to do
+    }
+  });
+
+  // Add the control to bottom left
+  const stageTableControl = new StageTableControl({ position: 'bottomleft' });
+  stageTableControl.addTo(map);
+
+  // Reference tbody for appending rows
+  const tableBody = document.getElementById("stage-table-body");
+
+  // Load routes
   routes.forEach(route => {
     new L.GPX(route.file, {
       async: true,
-
       polyline_options: {
         color: route.color,
         weight: 4,
         opacity: 0.9
       },
-
-      // 🔥 Completely disable all markers
-      markers: {
-        startIcon: null,
-        endIcon: null,
-        shadowIcon: null
-      }
+      markers: { startIcon: null, endIcon: null, shadowIcon: null }
     })
     .on('loaded', function(e) {
       allBounds.push(e.target.getBounds());
       fitMap();
+      const dist_km = (e.target.get_distance() / 1000).toFixed(1);
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td>${route.name}</td><td>${dist_km}</td>`;
+      tableBody.appendChild(tr);
     })
     .addTo(map);
   });
 
 
-  // ---- Load Resupply Waypoints ----
+  // Load resupply points
   resupplies.forEach(file => {
     new L.GPX(file, {
       async: true,
