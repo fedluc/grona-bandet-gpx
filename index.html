@@ -27,7 +27,7 @@
 <body>
 
 <header>
-  <h2>My GPX Routes Viewer</h2>
+  <h2>Federico's Gröna Bandet</h2>
 </header>
 
 <div id="map"></div>
@@ -37,41 +37,90 @@
 
 <script>
   const map = L.map('map');
+  map.setView([62.5, 13], 8);
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors'
   }).addTo(map);
 
-  const gpxFiles = [
-    "stage1_route.gpx",
-    "stage2_route.gpx",
-    "stage2_alt_route.gpx",
-    "stage3_route.gpx",
+  // -------------------------
+  // ROUTE FILES (COLORED)
+  // -------------------------
+
+  const routes = [
+    { file: "stage1_route.gpx", color: "red" },
+    { file: "stage2_route.gpx", color: "blue" },
+    { file: "stage2_alt_route.gpx", color: "cyan" },
+    { file: "stage3_route.gpx", color: "green" },
+  ];
+
+  // -------------------------
+  // RESUPPLY FILES (MARKERS)
+  // -------------------------
+
+  const resupplies = [
     "stage1_resupply.gpx",
     "stage2_resupply.gpx",
     "stage2_alt_resupply.gpx",
     "stage3_resupply.gpx",
-    
   ];
 
-  let bounds = [];
+  let allBounds = [];
 
-  gpxFiles.forEach(file => {
+  // ---- Load Routes ----
+  routes.forEach(route => {
+    new L.GPX(route.file, {
+      async: true,
+
+      polyline_options: {
+        color: route.color,
+        weight: 4,
+        opacity: 0.9
+      },
+
+      // 🔥 Completely disable all markers
+      markers: {
+        startIcon: null,
+        endIcon: null,
+        shadowIcon: null
+      }
+    })
+    .on('loaded', function(e) {
+      allBounds.push(e.target.getBounds());
+      fitMap();
+    })
+    .addTo(map);
+  });
+
+
+  // ---- Load Resupply Waypoints ----
+  resupplies.forEach(file => {
     new L.GPX(file, {
       async: true,
-      marker_options: {
-        startIconUrl: null,
-        endIconUrl: null,
-        shadowUrl: null
-      }
-    }).on('loaded', function(e) {
-      bounds.push(e.target.getBounds());
-      if (bounds.length === gpxFiles.length) {
-        let group = L.featureGroup(bounds.map(b => L.rectangle(b)));
-        map.fitBounds(group.getBounds());
-      }
-    }).addTo(map);
+      polyline_options: { opacity: 0 } // hide lines
+    })
+    .on('addpoint', function(e) {
+      const marker = e.point;
+      const title = marker.options.title || "Resupply Point";
+
+      // Popup only uses name
+      marker.bindPopup(`<strong>${title}</strong>`);
+    })
+    .on('loaded', function(e) {
+      allBounds.push(e.target.getBounds());
+      fitMap();
+    })
+    .addTo(map);
   });
+
+  function fitMap() {
+    if (allBounds.length === routes.length + resupplies.length) {
+      const group = L.featureGroup(
+        allBounds.map(b => L.rectangle(b))
+      );
+      map.fitBounds(group.getBounds());
+    }
+  }
 </script>
 
 </body>
