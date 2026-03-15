@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run with QGIS Python",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${file}",
+      "python": "/Applications/QGIS.app/Contents/MacOS/python",
+      "console": "integratedTerminal"
+    }
+  ]
+}

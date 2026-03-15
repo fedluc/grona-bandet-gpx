@@ -1,0 +1,10 @@
+{
+  "python.defaultInterpreterPath": "/Applications/QGIS.app/Contents/MacOS/python",
+  "python.analysis.extraPaths": [
+    "/Applications/QGIS.app/Contents/Frameworks/lib/python3.12",
+    "/Applications/QGIS.app/Contents/Frameworks/lib/python3.12/site-packages",
+    "/Applications/QGIS.app/Contents/Resources/python",
+    "/Applications/QGIS.app/Contents/Resources/python/plugins"
+  ],
+  "python-envs.defaultEnvManager": "ms-python.python:system",
+}
