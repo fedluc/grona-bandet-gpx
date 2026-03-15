@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<gpx version="1.1" creator="GDAL 3.12.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+<metadata>
+<bounds minlat="67.068667576649602" minlon="16.802812378638009" maxlat="68.358625000123922" maxlon="18.784671991320852"/>                                       
+</metadata>
+<wpt lat="67.068667576649602" lon="17.158538321992413">
+  <name>Såmmarlappa</name>
+  <desc>Butik - https://www.svenskaturistforeningen.se/boende/stf-sammarlappa-fjallstuga/</desc>
+</wpt>
+<wpt lat="67.192478004693839" lon="17.121554058371792">
+  <name>Darreluoppal</name>
+  <desc>Butik - https://padjelanta.com/stugor/darreluoppal/</desc>
+</wpt>
+<wpt lat="67.268482860305909" lon="17.032237198624436">
+  <name>Duottar</name>
+  <desc>Butik - https://padjelanta.com/stugor/darreluoppal/</desc>
+</wpt>
+<wpt lat="67.373249078865001" lon="16.802812378638009">
+  <name>Árasluokta</name>
+  <desc>Butik - https://padjelanta.com/stugor/arasluokta/</desc>
+</wpt>
+<wpt lat="67.463296586357643" lon="16.905818779516924">
+  <name>Låddejåhkå</name>
+  <desc>Butik - https://padjelanta.com/stugor/laddejahka/</desc>
+</wpt>
+<wpt lat="67.559128492064033" lon="17.200425576910643">
+  <name>Gisuris</name>
+  <desc>Butik - https://padjelanta.com/stugor/gisuris/</desc>
+</wpt>
+<wpt lat="67.723192394039444" lon="17.4645925897795">
+  <name>Ritsem</name>
+  <desc>Butik - https://www.swedishtouristassociation.com/facilities/stf-ritsem/</desc>
+</wpt>
+<wpt lat="67.946415233144592" lon="18.28284193165311">
+  <name>Sälka</name>
+  <desc>Butik - https://www.svenskaturistforeningen.se/boende/stf-salka-fjallstuga/</desc>
+</wpt>
+<wpt lat="68.13715152412891" lon="18.414144471940862">
+  <name>Alesjaure</name>
+  <desc>https://www.svenskaturistforeningen.se/boende/stf-alesjaure-fjallstuga/</desc>
+</wpt>
+<wpt lat="68.286183887013991" lon="18.590541538945416">
+  <name>Abiskojaure</name>
+  <desc>Butik - https://www.svenskaturistforeningen.se/boende/stf-abiskojaure-fjallstuga/</desc>
+</wpt>
+<wpt lat="68.358625000123922" lon="18.784671991320852">
+  <name>Abisko</name>
+  <desc>Fjällstation - https://www.svenskaturistforeningen.se/boende/stf-abisko-turiststation/</desc>
+</wpt>
+</gpx>

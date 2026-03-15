@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<gpx version="1.1" creator="GDAL 3.12.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+<metadata>
+<bounds minlat="63.318845184325234" minlon="11.941102399558147" maxlat="64.223328073309133" maxlon="13.836257720849130"/>                                       
+</metadata>
+<wpt lat="63.318845184325234" lon="12.086481404232662">
+  <name>Storlien</name>
+  <desc>Supermercato - https://www.google.com/search?client=safari&amp;rls=en&amp;q=storlien+aff%C3%A4rer&amp;ie=UTF-8&amp;oe=UTF-8&amp;channel=31#vhid=/g/11hhs5yy48&amp;vssid=lcl</desc>
+</wpt>
+<wpt lat="63.463033243321711" lon="12.059005449527408">
+  <name>Angeltjønnhytta</name>
+  <desc>Self-service hut: https://hyttebestilling.dnt.no/hytte/10483 </desc>
+</wpt>
+<wpt lat="63.6828396029657" lon="12.261302521338166">
+  <name>Bellingstua</name>
+  <desc>Self service hut - https://hyttebestilling.dnt.no/hytte/101367</desc>
+</wpt>
+<wpt lat="63.542061034166672" lon="11.941102399558147">
+  <name>Fersilia</name>
+  <desc>Self-service hut:https://hyttebestilling.dnt.no/kart?type=cabin&amp;value=10468#9.97/63.5191/11.9627 </desc>
+</wpt>
+<wpt lat="63.595510661345145" lon="12.050167970763304">
+  <name>Sulsjøhytta</name>
+  <desc>Self-service hut: https://hyttebestilling.dnt.no/kart?type=cabin&amp;value=101175709#11.19/63.5638/12.0287</desc>
+</wpt>
+<wpt lat="63.784157323743202" lon="12.384387814225503">
+  <name>Veresstua</name>
+  <desc>Self-service hut: https://hyttebestilling.dnt.no/kart?type=cabin&amp;value=101291#9.71/63.7485/12.3514</desc>
+</wpt>
+<wpt lat="64.063388654812627" lon="12.894508433799041">
+  <name>Holden Fjellgård</name>
+  <desc>Self-service hut - https://hyttebestilling.dnt.no/kart?type=cabin&amp;value=10250#9.26/64.0065/12.9903</desc>
+</wpt>
+<wpt lat="64.104057195715725" lon="13.083666955395255">
+  <name>Gjeftsoen Fjellgård</name>
+  <desc>https://gjefsjo.no/en/contact/</desc>
+</wpt>
+<wpt lat="64.223328073309133" lon="13.83625772084913">
+  <name>Sorli</name>
+  <desc>Supermercato - https://share.google/GQqJaC25QNFEtIygc</desc>
+</wpt>
+<wpt lat="64.017497360312362" lon="12.681326655302115">
+  <name>Gaundalen</name>
+  <desc>Serviced hut - https://ut.no/hytte/10274/gaundalen-fjellgard</desc>
+</wpt>
+</gpx>

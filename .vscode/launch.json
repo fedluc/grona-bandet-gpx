@@ -7,22 +7,7 @@
       "request": "launch",
       "program": "${file}",
       "python": "/Applications/QGIS.app/Contents/MacOS/python",
-      "console": "integratedTerminal"
-    },
-    {
-      "name": "Split route features",
-      "type": "debugpy",
-      "request": "launch",
-      "program": "${workspaceFolder}/python/split_route_features.py",
-      "python": "/Applications/QGIS.app/Contents/MacOS/python",
-      "console": "integratedTerminal"
-    },
-    {
-      "name": "Export routes to GPX",
-      "type": "debugpy",
-      "request": "launch",
-      "program": "${workspaceFolder}/python/export_routes_to_gpx.py",
-      "python": "/Applications/QGIS.app/Contents/MacOS/python",
+      "env": { "PYTHONPATH": "${workspaceFolder}/python" },
       "console": "integratedTerminal"
     }
   ]
