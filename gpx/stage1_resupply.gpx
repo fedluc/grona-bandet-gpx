@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<gpx version="1.1" creator="GDAL 3.12.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+<metadata>
+<bounds minlat="62.317056719898176" minlon="12.217198909001464" maxlat="62.916972976729085" maxlon="12.505890615424279"/>                                       
+</metadata>
+<wpt lat="62.317056719898176" lon="12.450250131813798">
+  <name>Rogenstugan</name>
+  <desc>Stuga - Butik - https://www.svenskaturistforeningen.se/boende/stf-rogen-fjallstuga/</desc>
+</wpt>
+<wpt lat="62.579028416077108" lon="12.217198909001464">
+  <name>Hamra</name>
+  <desc>Supermarket - https://www.tanndalen.com/mat-noeje/hamra-livs</desc>
+</wpt>
+<wpt lat="62.916972976729085" lon="12.505890615424279">
+  <name>Helags</name>
+  <desc>Fjällstation - Butik + Restaurant - https://www.svenskaturistforeningen.se/boende/stf-helags-fjallstation/</desc>
+</wpt>
+</gpx>

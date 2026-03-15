@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<gpx version="1.1" creator="GDAL 3.12.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+<metadata>
+<bounds minlat="63.148630856321162" minlon="12.966402654981598" maxlat="64.503478252436423" maxlon="14.165607621503401"/>                                       
+</metadata>
+<wpt lat="63.148630856321162" lon="12.966402654981598">
+  <name>Vålådalen</name>
+  <desc>Fjällstation - Butik + Restaurant - https://www.svenskaturistforeningen.se/boende/stf-valadalen-fjallstation/</desc>
+</wpt>
+<wpt lat="63.973920812665902" lon="14.165607621503401">
+  <name>Rötviken</name>
+  <desc>Supermarket - https://www.handlarn.se/butiker-och-oppettider/rotviken</desc>
+</wpt>
+<wpt lat="63.317378859215381" lon="13.236280564642183">
+  <name>Undersåker</name>
+  <desc>Supermarket - https://www.ica.se/butiker/nara/are/ica-nara-strandbergs-undersaker-1003944/ </desc>
+</wpt>
+<wpt lat="63.474040079299996" lon="13.229095047521122">
+  <name>Kall</name>
+  <desc>Ica Nära - https://www.ica.se/erbjudanden/ica-nara-kall-1004022/</desc>
+</wpt>
+<wpt lat="63.780210867949997" lon="13.8228657708298">
+  <name>Jänsmässholmen</name>
+  <desc>Hotel - https://jansmassholmen.se/vara-rum/</desc>
+</wpt>
+<wpt lat="64.070616965211144" lon="14.140466003087752">
+  <name>Valsjöbyn</name>
+  <desc>Supermarket - https://share.google/6Bgw3dKGIbC4TdwNw</desc>
+</wpt>
+<wpt lat="64.503478252436423" lon="14.14515659104177">
+  <name>Gäddede</name>
+  <desc>Supermarket - https://www.ica.se/butiker/nara/gaddede/</desc>
+</wpt>
+</gpx>

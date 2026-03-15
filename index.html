@@ -68,16 +68,69 @@
     attribution: '&copy; OpenStreetMap contributors'
   }).addTo(map);
 
+  // Colors by main stage number — all stage<N>_* variants share the same color
+  const stageColors = {
+    1: "red",
+    2: "blue",
+    3: "yellow",
+    4: "#00FF00",
+    5: "orange",
+    6: "magenta",
+  };
+
+  function colorForFile(file) {
+    const m = file.match(/stage(\d+)/);
+    return m ? (stageColors[parseInt(m[1])] ?? "gray") : "gray";
+  }
+
+  function nameForFile(file) {
+    // "stage2_alt.3_route.gpx" -> "Stage 2 Alt.3"
+    return file
+      .replace('_route.gpx', '')
+      .replace(/stage(\d+)/, (_, n) => `Stage ${n}`)
+      .replace('_alt', ' Alt');
+  }
+
+  const GPX_DIR = "gpx/";
+
   // Route files
   const routes = [
-    { file: "stage1_route.gpx", color: "red", name: "Stage 1" },
-    { file: "stage2_route.gpx", color: "blue", name: "Stage 2" },
-    { file: "stage2_alt_route.gpx", color: "blue", name: "Stage 2 Alt" },
-    { file: "stage3_route.gpx", color: "yellow", name: "Stage 3" },
-    { file: "stage4_route.gpx", color: "#00FF00", name: "Stage 4" },
-    { file: "stage5_route.gpx", color: "orange", name: "Stage 5" },
-    { file: "stage6_route.gpx", color: "magenta", name: "Stage 6" },
-  ];
+    "stage1.1_route.gpx",
+    "stage2.1_route.gpx",
+    "stage2.2_route.gpx",
+    "stage2.3_route.gpx",
+    "stage2.4_route.gpx",
+    "stage2.5_route.gpx",
+    "stage2.6_route.gpx",
+    "stage2.7_route.gpx",
+    "stage2_alt.1_route.gpx",
+    "stage2_alt.2_route.gpx",
+    "stage2_alt.3_route.gpx",
+    "stage2_alt.4_route.gpx",
+    "stage2_alt.5_route.gpx",
+    "stage2_alt.6_route.gpx",
+    "stage2_alt.7_route.gpx",
+    "stage2_alt.8_route.gpx",
+    "stage2_alt.9_route.gpx",
+    "stage2_alt.10_route.gpx",
+    "stage3.1_route.gpx",
+    "stage3.2_route.gpx",
+    "stage3.3_route.gpx",
+    "stage3.4_route.gpx",
+    "stage4.1_route.gpx",
+    "stage4.2_route.gpx",
+    "stage4.3_route.gpx",
+    "stage5.1_route.gpx",
+    "stage5.2_route.gpx",
+    "stage5.3_route.gpx",
+    "stage5.4_route.gpx",
+    "stage6.1_route.gpx",
+    "stage6.2_route.gpx",
+    "stage6.3_route.gpx",
+    "stage6.4_route.gpx",
+    "stage6.5_route.gpx",
+    "stage6.6_route.gpx",
+  ].map(file => ({ file: GPX_DIR + file, name: nameForFile(file) }));
 
 
   // Resupply waypoint files
@@ -88,8 +141,7 @@
     "stage3_resupply.gpx",
     "stage4_resupply.gpx",
     "stage5_resupply.gpx",
-    "stage6_resupply.gpx",
-  ];
+  ].map(file => GPX_DIR + file);
 
   let allBounds = [];
 
@@ -119,12 +171,39 @@
   // Reference tbody for appending rows
   const tableBody = document.getElementById("stage-table-body");
 
+  function stageLabel(file) {
+    // "gpx/stage2_alt.3_route.gpx" -> "Stage 2 Alt", "gpx/stage3.1_route.gpx" -> "Stage 3"
+    const basename = file.split('/').pop();
+    return basename
+      .replace(/\.\d+_route\.gpx$/, '')
+      .replace(/stage(\d+)/, (_, n) => `Stage ${n}`)
+      .replace('_alt', ' Alt');
+  }
+
+  function renderTable() {
+    tableBody.innerHTML = '';
+    stageDistances.forEach((km, label) => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td>${label}</td><td>${km.toFixed(1)}</td>`;
+      tableBody.appendChild(tr);
+    });
+  }
+
+  // Accumulated distances keyed by stage label, insertion-ordered
+  const stageDistances = new Map();
+
+  // Pre-populate keys in stage order so rows appear in a stable order
+  routes.forEach(route => {
+    const label = stageLabel(route.file);
+    if (!stageDistances.has(label)) stageDistances.set(label, 0);
+  });
+
   // Load routes
   routes.forEach(route => {
     new L.GPX(route.file, {
       async: true,
       polyline_options: {
-        color: route.color,
+        color: colorForFile(route.file),
         weight: 4,
         opacity: 0.9
       },
@@ -133,10 +212,9 @@
     .on('loaded', function(e) {
       allBounds.push(e.target.getBounds());
       fitMap();
-      const dist_km = (e.target.get_distance() / 1000).toFixed(1);
-      const tr = document.createElement("tr");
-      tr.innerHTML = `<td>${route.name}</td><td>${dist_km}</td>`;
-      tableBody.appendChild(tr);
+      const label = stageLabel(route.file);
+      stageDistances.set(label, stageDistances.get(label) + e.target.get_distance() / 1000);
+      renderTable();
     })
     .addTo(map);
   });
@@ -151,9 +229,9 @@
     .on('addpoint', function(e) {
       const marker = e.point;
       const title = marker.options.title || "Resupply Point";
-
-      // Popup only uses name
-      marker.bindPopup(`<strong>${title}</strong>`);
+      const descEl = e.element.getElementsByTagName('desc');
+      const desc = descEl.length > 0 ? descEl[0].textContent : '';
+      marker.bindPopup(`<strong>Name:</strong> ${title}` + (desc ? `<br><strong>Info:</strong> ${desc}` : ''));
     })
     .on('loaded', function(e) {
       allBounds.push(e.target.getBounds());

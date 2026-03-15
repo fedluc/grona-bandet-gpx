@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<gpx version="1.1" creator="GDAL 3.12.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+<metadata>
+<bounds minlat="64.819008939212011" minlon="14.242573256870491" maxlat="65.817711817266101" maxlon="15.090550694022227"/>                                       
+</metadata>
+<wpt lat="64.819008939212011" lon="14.242573256870491">
+  <name>Ankarede</name>
+  <desc>Restaurant - Kafe</desc>
+</wpt>
+<wpt lat="65.06313485962896" lon="14.79973946457403">
+  <name>Klimpfjäll</name>
+  <desc>Supermercato - Ombud  - https://www.handlarn.se/butiker/klimpfjall/ </desc>
+</wpt>
+<wpt lat="65.422047815035583" lon="14.813323226507539">
+  <name>Gränssjö</name>
+  <desc>Campeggio - pacco https://granssjoarna.se/camping </desc>
+</wpt>
+<wpt lat="65.710659064443561" lon="14.611354196282688">
+  <name>JoeSjö</name>
+  <desc>Negozio - https://boka.hemavan.nu/tarna-vilt</desc>
+</wpt>
+<wpt lat="65.817711817266101" lon="15.090550694022227">
+  <name>Hemavan</name>
+  <desc>Supermercato - https://www.ica.se/butiker/nara/hemavan/</desc>
+</wpt>
+<wpt lat="65.710659064443561" lon="14.611354196282688">
+  <name>Joesjö</name>
+  <desc>Negozio - https://boka.hemavan.nu/tarna-vilt</desc>
+</wpt>
+</gpx>

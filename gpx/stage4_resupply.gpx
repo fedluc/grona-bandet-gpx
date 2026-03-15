@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<gpx version="1.1" creator="GDAL 3.12.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+<metadata>
+<bounds minlat="65.885197041460387" minlon="15.160658599114464" maxlat="66.953962939857249" maxlon="17.720418500135885"/>                                       
+</metadata>
+<wpt lat="65.885197041460387" lon="15.160658599114464">
+  <name>Viterskalet</name>
+  <desc>Butik - https://www.svenskaturistforeningen.se/boende/stf-viterskalet-fjallstuga/</desc>
+</wpt>
+<wpt lat="65.989103833371956" lon="15.497784681808199">
+  <name>Tärnasjö</name>
+  <desc>Butik - https://www.svenskaturistforeningen.se/boende/stf-tarnasjo-fjallstuga/</desc>
+</wpt>
+<wpt lat="65.958429250218543" lon="16.192009242465634">
+  <name>Ammarnäs</name>
+  <desc>Supermarket - https://www.ammarnaslivs.se</desc>
+</wpt>
+<wpt lat="66.279077195940161" lon="16.655427419215901">
+  <name>Adolfström</name>
+  <desc>Butik - https://adolfstrom.com</desc>
+</wpt>
+<wpt lat="66.386896030856661" lon="16.963313157597963">
+  <name>Jäckvik</name>
+  <desc>Supermercato - https://www.ica.se/butiker/nara/arjeplog/ica-nara-jackvik-1007011/</desc>
+</wpt>
+<wpt lat="66.953962939857249" lon="17.720418500135885">
+  <name>Kvikkjokk</name>
+  <desc>Fjällstation - https://www.svenskaturistforeningen.se/boende/stf-kvikkjokk-fjallstation/</desc>
+</wpt>
+</gpx>
