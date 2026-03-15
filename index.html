@@ -68,15 +68,30 @@
     attribution: '&copy; OpenStreetMap contributors'
   }).addTo(map);
 
+  // Colors by main stage number — all stage<N>_* variants share the same color
+  const stageColors = {
+    1: "red",
+    2: "blue",
+    3: "yellow",
+    4: "#00FF00",
+    5: "orange",
+    6: "magenta",
+  };
+
+  function colorForFile(file) {
+    const m = file.match(/^stage(\d+)/);
+    return m ? (stageColors[parseInt(m[1])] ?? "gray") : "gray";
+  }
+
   // Route files
   const routes = [
-    { file: "stage1_route.gpx", color: "red", name: "Stage 1" },
-    { file: "stage2_route.gpx", color: "blue", name: "Stage 2" },
-    { file: "stage2_alt_route.gpx", color: "blue", name: "Stage 2 Alt" },
-    { file: "stage3_route.gpx", color: "yellow", name: "Stage 3" },
-    { file: "stage4_route.gpx", color: "#00FF00", name: "Stage 4" },
-    { file: "stage5_route.gpx", color: "orange", name: "Stage 5" },
-    { file: "stage6_route.gpx", color: "magenta", name: "Stage 6" },
+    { file: "stage1_route.gpx",     name: "Stage 1" },
+    { file: "stage2_route.gpx",     name: "Stage 2" },
+    { file: "stage2_alt_route.gpx", name: "Stage 2 Alt" },
+    { file: "stage3_route.gpx",     name: "Stage 3" },
+    { file: "stage4_route.gpx",     name: "Stage 4" },
+    { file: "stage5_route.gpx",     name: "Stage 5" },
+    { file: "stage6_route.gpx",     name: "Stage 6" },
   ];
 
 
@@ -124,7 +139,7 @@
     new L.GPX(route.file, {
       async: true,
       polyline_options: {
-        color: route.color,
+        color: colorForFile(route.file),
         weight: 4,
         opacity: 0.9
       },

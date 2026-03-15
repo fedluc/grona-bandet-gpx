@@ -1,8 +1,9 @@
 """
 Split features in *_route.gpkg files into separate GeoPackage files.
 
-Each feature is saved as a new .gpkg file named <fid>_<name>.gpkg,
-written to OUTPUT_DIR.
+Each feature is saved as a new .gpkg file named stage<N>.<rescaled_fid>_route.gpkg.
+Can be run standalone (writes to OUTPUT_DIR) or imported and called with a
+custom output directory via split_all().
 
 Usage:
     /Applications/QGIS.app/Contents/MacOS/python python/split_route_features.py
@@ -35,14 +36,15 @@ def ensure_dir(path: str) -> None:
     os.makedirs(path, exist_ok=True)
 
 
-def stage_from_path(src_path: str) -> str:
+def stage_number_from_path(src_path: str) -> str:
+    # e.g. "stage1_route.gpkg" -> "1", "stage2_alt_route.gpkg" -> "2_alt"
     basename = os.path.basename(src_path)
-    return basename.split("_route")[0]
+    return basename.split("_route")[0].replace("stage", "")
 
 
-def output_path(stage: str, fid: int, name: str) -> str:
-    filename = f"stage_{stage}_fid_{fid}_name_{name}.gpkg"
-    return os.path.join(OUTPUT_DIR, filename)
+def output_path(out_dir: str, stage_number: str, rescaled_fid: int) -> str:
+    filename = f"stage{stage_number}.{rescaled_fid}_route.gpkg"
+    return os.path.join(out_dir, filename)
 
 
 def write_feature(driver, src_layer, feature, out_path: str) -> None:
@@ -72,24 +74,50 @@ def write_feature(driver, src_layer, feature, out_path: str) -> None:
     out_ds = None
 
 
-def split_file(driver, src_path: str) -> None:
+def split_file(driver, src_path: str, out_dir: str) -> list[str]:
+    """Split one source file into per-feature gpkg files. Returns output paths."""
     src_ds = ogr.Open(src_path)
     if src_ds is None:
         print(f"Could not open {src_path}, skipping.")
-        return
+        return []
 
     src_layer = src_ds.GetLayer(0)
-    stage: str = stage_from_path(src_path)
+    stage_number: str = stage_number_from_path(src_path)
     print(f"{os.path.basename(src_path)}: {src_layer.GetFeatureCount()} feature(s)")
 
-    for feature in src_layer:
-        fid: int = feature.GetFID()
-        name: str = feature.GetField("name")
-        out: str = output_path(stage, fid, name)
+    features = sorted(src_layer, key=lambda f: f.GetFID())
+    out_paths = []
+
+    for rescaled_fid, feature in enumerate(features, start=1):
+        out = output_path(out_dir, stage_number, rescaled_fid)
         write_feature(driver, src_layer, feature, out)
+        out_paths.append(out)
         print(f"  -> {os.path.basename(out)}")
 
     src_ds = None
+    return out_paths
+
+
+# ---------------------------------------------------------------------------
+# Public API (used by export_routes_to_gpx.py)
+# ---------------------------------------------------------------------------
+
+
+def split_all(out_dir: str) -> list[str]:
+    """Split all *_route.gpkg files into out_dir. Returns list of output paths."""
+    route_files = find_route_files(qgis_data_dir)
+    if not route_files:
+        print("No *_route.gpkg files found in qgis_data/")
+        return []
+
+    ensure_dir(out_dir)
+    driver = ogr.GetDriverByName("GPKG")
+    all_paths = []
+
+    for src_path in route_files:
+        all_paths.extend(split_file(driver, src_path, out_dir))
+
+    return all_paths
 
 
 # ---------------------------------------------------------------------------
@@ -98,17 +126,7 @@ def split_file(driver, src_path: str) -> None:
 
 
 def main() -> None:
-    route_files = find_route_files(qgis_data_dir)
-    if not route_files:
-        print("No *_route.gpkg files found in qgis_data/")
-        return
-
-    ensure_dir(OUTPUT_DIR)
-    driver = ogr.GetDriverByName("GPKG")
-
-    for src_path in route_files:
-        split_file(driver, src_path)
-
+    split_all(OUTPUT_DIR)
     print("Done.")
 
 
