@@ -87,7 +87,7 @@
     // "stage2_alt.3_route.gpx" -> "Stage 2 Alt.3"
     return file
       .replace('_route.gpx', '')
-      .replace(/^stage(\d+)/, (_, n) => `Stage ${n}`)
+      .replace(/stage(\d+)/, (_, n) => `Stage ${n}`)
       .replace('_alt', ' Alt');
   }
 
@@ -172,10 +172,11 @@
   const tableBody = document.getElementById("stage-table-body");
 
   function stageLabel(file) {
-    // "stage2_alt.3_route.gpx" -> "Stage 2 Alt", "stage3.1_route.gpx" -> "Stage 3"
-    return file
+    // "gpx/stage2_alt.3_route.gpx" -> "Stage 2 Alt", "gpx/stage3.1_route.gpx" -> "Stage 3"
+    const basename = file.split('/').pop();
+    return basename
       .replace(/\.\d+_route\.gpx$/, '')
-      .replace(/^stage(\d+)/, (_, n) => `Stage ${n}`)
+      .replace(/stage(\d+)/, (_, n) => `Stage ${n}`)
       .replace('_alt', ' Alt');
   }
 
