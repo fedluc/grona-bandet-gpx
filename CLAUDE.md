@@ -8,21 +8,19 @@ GeoPackage (`.gpkg`) files edited in QGIS.
 
 ## Python environment
 
-All Python must be run with the QGIS bundled interpreter:
-
-```
-/Applications/QGIS.app/Contents/MacOS/python
-```
-
-Scripts use `osgeo` (GDAL/OGR) which is bundled with QGIS — do not use system Python.
-`PROJ_DATA` is set automatically in `python/utils.py` before osgeo is imported.
+Scripts must be run with the QGIS bundled Python interpreter — do not use system Python.
+To find the correct path on any platform, run this in the QGIS Python Console:
+`import sys; print(sys.executable)`
 
 Because scripts import each other, always set `PYTHONPATH=python` when running from the
 repo root:
 
 ```bash
-PYTHONPATH=python /Applications/QGIS.app/Contents/MacOS/python python/export_to_gpx.py
+PYTHONPATH=python <qgis-python> python/export_to_gpx.py
 ```
+
+`PROJ_DATA` is set automatically in `python/utils.py` on macOS (QGIS app bundle). On
+other platforms PROJ locates its database on its own.
 
 ## Generating GPX files
 
@@ -65,13 +63,16 @@ http://localhost:8080.
 Stage colours in `index.html` are controlled by the `stageColors` map keyed by stage
 number. All `stage<N>_*` files (e.g. stage2 and stage2_alt) share the same colour.
 
-## VS Code debugging
+## VS Code setup
+
+Set the Python interpreter to the QGIS Python on your machine via
+**Python: Select Interpreter** (or edit `.vscode/settings.json` directly). This is the
+only machine-specific configuration needed — `launch.json` and `tasks.json` both derive
+the interpreter from this setting.
 
 `launch.json` has a single config "Run with QGIS Python" that debugs whichever file is
-currently active (`${file}`). Open a script, set breakpoints, press F5.
-
-The launch config sets `PYTHONPATH` to `${workspaceFolder}/python` so cross-module
-imports work when debugging any script.
+currently active (`${file}`). Open a script, set breakpoints, press F5. `PYTHONPATH` is
+set to `${workspaceFolder}/python` so cross-module imports work.
 
 ## Type annotations in osgeo code
 

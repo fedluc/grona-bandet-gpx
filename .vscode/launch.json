@@ -6,7 +6,6 @@
       "type": "debugpy",
       "request": "launch",
       "program": "${file}",
-      "python": "/Applications/QGIS.app/Contents/MacOS/python",
       "env": { "PYTHONPATH": "${workspaceFolder}/python" },
       "console": "integratedTerminal"
     }

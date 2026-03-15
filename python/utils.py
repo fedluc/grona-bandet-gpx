@@ -1,11 +1,11 @@
 import glob
 import os
 
-# Must be set before importing osgeo so PROJ can locate its database
-os.environ.setdefault(
-    "PROJ_DATA",
-    "/Applications/QGIS.app/Contents/Resources/qgis/proj",
-)
+# On macOS with a QGIS app bundle, PROJ cannot find its database unless we point
+# it explicitly. On other platforms PROJ typically locates it on its own.
+_MACOS_PROJ_DATA = "/Applications/QGIS.app/Contents/Resources/qgis/proj"
+if "PROJ_DATA" not in os.environ and os.path.exists(_MACOS_PROJ_DATA):
+    os.environ["PROJ_DATA"] = _MACOS_PROJ_DATA
 
 from osgeo import ogr, osr
 
