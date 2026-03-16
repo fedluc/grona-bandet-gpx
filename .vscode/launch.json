@@ -6,7 +6,8 @@
       "type": "debugpy",
       "request": "launch",
       "program": "${file}",
-      "env": { "PYTHONPATH": "${workspaceFolder}/python" },
+      "python": "${env:QGIS_PYTHON}",
+      "envFile": "${workspaceFolder}/.env",
       "console": "integratedTerminal"
     }
   ]

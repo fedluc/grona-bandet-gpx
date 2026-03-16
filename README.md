@@ -6,15 +6,20 @@ A collection of gpx files that describe my Gröna Bandet route for Summer 2026. 
 [QGIS](https://qgis.org) must be installed. The scripts use the QGIS bundled Python
 interpreter and its GDAL/OGR bindings.
 
-## Generating GPX files
+## Setup
 
-From the repo root, run:
+Copy `.env.example` to `.env` and set `QGIS_PYTHON` to the path of the QGIS bundled
+Python interpreter on your machine:
 
 ```bash
-PYTHONPATH=python <qgis-python> python/export_to_gpx.py
+cp .env.example .env
+# then edit .env
 ```
 
-where `<qgis-python>` is the path to the QGIS Python interpreter. To find it, open the
-QGIS Python Console and run `import sys; print(sys.executable)`.
+## Generating GPX files
+
+```bash
+source .env && $QGIS_PYTHON python/export_to_gpx.py
+```
 
 GPX files are written to the `gpx/` folder.
