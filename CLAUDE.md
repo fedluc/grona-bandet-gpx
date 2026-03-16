@@ -9,14 +9,14 @@ GeoPackage (`.gpkg`) files edited in QGIS.
 ## Python environment
 
 Scripts must be run with the QGIS bundled Python interpreter — do not use system Python.
-To find the correct path on any platform, run this in the QGIS Python Console:
-`import sys; print(sys.executable)`
-
-Because scripts import each other, always set `PYTHONPATH=python` when running from the
-repo root:
+The interpreter path is machine-specific and stored in `.env` (gitignored). Copy
+`.env.example` to `.env` and set `QGIS_PYTHON`. On macOS the path is
+`/Applications/QGIS.app/Contents/MacOS/python3.12`.
+Note: `sys.executable` in the QGIS Python Console returns the QGIS app binary, not the
+Python interpreter — do not use it.
 
 ```bash
-PYTHONPATH=python <qgis-python> python/export_to_gpx.py
+source .env && $QGIS_PYTHON python/export_to_gpx.py
 ```
 
 `PROJ_DATA` is set automatically in `python/utils.py` on macOS (QGIS app bundle). On
@@ -54,7 +54,7 @@ public.
 Serve the repo root over HTTP (not file://) to avoid CORS errors:
 
 ```bash
-PYTHONPATH=python /Applications/QGIS.app/Contents/MacOS/python -m http.server 8080
+/Applications/QGIS.app/Contents/MacOS/python3.12 -m http.server 8080
 ```
 
 Or use the VS Code task: **Terminal > Run Task > Serve index.html**, then open

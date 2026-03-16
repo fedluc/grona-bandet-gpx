@@ -4,7 +4,7 @@
     {
       "label": "Serve index.html",
       "type": "shell",
-      "command": "${config:python.defaultInterpreterPath} -m http.server 8080",
+      "command": "source ${workspaceFolder}/.env && $QGIS_PYTHON -m http.server 8080",
       "options": {
         "cwd": "${workspaceFolder}"
       },
