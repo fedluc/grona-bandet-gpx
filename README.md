@@ -19,7 +19,8 @@ cp .env.example .env
 ## Generating GPX files
 
 ```bash
-source .env && $QGIS_PYTHON python/export_to_gpx.py
+source .env
+qgis-python python/export_to_gpx.py
 ```
 
 GPX files are written to the `gpx/` folder.

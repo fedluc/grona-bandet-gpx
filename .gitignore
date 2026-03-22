@@ -2,6 +2,7 @@
 
 qgis_data/split/
 qgis_data/gpx/
+downloads/
 
 # Python
 __pycache__/
